@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          Provider<PhotoModel>(
+          ChangeNotifierProvider<PhotoModel>(
             create: (_) => PhotoModel(""),
           )
         ],

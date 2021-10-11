@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:ocr/models.dart';
 import 'package:provider/provider.dart';
@@ -100,34 +101,37 @@ class MyHomePage extends StatelessWidget {
         title: Text("OCR"),
       ),
       body: Center(child: Consumer<PhotoModel>(builder: (_, value, __) {
-        return Column(children: [
-          Text(value.path),
-          Row(
-            children: [
-              ElevatedButton(
-                  onPressed: () async {
-                    ImagePicker _imagePicker = new ImagePicker();
-                    XFile? res = await _imagePicker.pickImage(
-                        source: ImageSource.gallery);
-                    if (res != null) {
-                      value.path = res.path;
-                    }
-                  },
-                  child: Text("Choose from Gallery")),
-              ElevatedButton(
-                  onPressed: () async {
-                    ImagePicker _imagePicker = new ImagePicker();
-                    XFile? res = await _imagePicker.pickImage(
-                        source: ImageSource.camera);
-                    if (res != null) {
-                      value.path = res.path;
-                      Navigator.pushNamed(context, "/ocr");
-                    }
-                  },
-                  child: Text("Choose from Camera"))
-            ],
-          )
-        ]);
+        return Column(
+          children: [
+            Row(
+              children: [
+                ElevatedButton(
+                    onPressed: () async {
+                      ImagePicker _imagePicker = new ImagePicker();
+                      XFile? res = await _imagePicker.pickImage(
+                          source: ImageSource.gallery);
+                      if (res != null) {
+                        value.path = res.path;
+                        Navigator.pushNamed(context, "/ocr");
+                      }
+                    },
+                    child: Text("Choose from Gallery")),
+                ElevatedButton(
+                    onPressed: () async {
+                      ImagePicker _imagePicker = new ImagePicker();
+                      XFile? res = await _imagePicker.pickImage(
+                          source: ImageSource.camera);
+                      if (res != null) {
+                        value.path = res.path;
+                        Navigator.pushNamed(context, "/ocr");
+                      }
+                    },
+                    child: Text("Choose from Camera"))
+              ],
+            )
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        );
       })),
     );
   }
